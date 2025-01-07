@@ -1,0 +1,21 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build']  # Assuming you have a "build" script in your package.json
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+    - 'gcloud'
+    - 'run'
+    - 'deploy'
+    - 'api-auth-cloud-run'
+    - '--source'
+    - '.'  # Deploy from the source directory
+    - '--platform'
+    - 'managed'
+    - '--region'
+    - 'us-central1'
+
+timeout: 1200s  # Optional: Set a timeout for the deployment process
