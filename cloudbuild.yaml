@@ -13,13 +13,13 @@ steps:
       - 'gcloud'
       - 'run'
       - 'deploy'
-      - 'api-auth-cloud-run'
+      - 'api-auth-cloud-run'  # Replace with your service name
       - '--source'
-      - '.'
+      - '.'  # The source of your app
       - '--platform'
       - 'managed'
       - '--region'
-      - 'us-west1'
+      - 'us-west1'  # Replace with your desired region
       - '--set-env-vars'
       - 'GOOGLE_CLIENT_ID=$(gcloud secrets versions access latest --secret="google-client-id")'
       - '--set-env-vars'
@@ -30,4 +30,9 @@ steps:
       - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
       - '--set-env-vars'
       - 'NODE_ENV=production'  # Make sure to set the production environment
-    timeout: 1200s  # Optional: Set a timeout for the deployment process
+
+  # Step 4: Run the app in production mode using npm run start:prod
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'start:prod']  # This runs your app using 'node dist/main'
+
+timeout: 1200s  # Optional: Set a timeout for the deployment process
