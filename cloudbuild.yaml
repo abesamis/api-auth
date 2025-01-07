@@ -1,36 +1,33 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
+  # Step 1: Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
 
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build']  # Assuming you have a "build" script in your package.json
+  # Step 2: Build the project
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']  # Assuming you have a "build" script in your package.json
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args:
-    - 'gcloud'
-    - 'run'
-    - 'deploy'
-    - 'api-auth-cloud-run'
-    - '--source'
-    - '.'  # Deploy from the source directory
-    - '--platform'
-    - 'managed'
-    - '--region'
-    - 'us-west1'
-    - '--set-env-vars'
-    - 'PORT=8080'
-    - '--set-env-vars'
-    - 'GOOGLE_CLIENT_ID=$(gcloud secrets versions access latest --secret="google-client-id")'
-    - '--set-env-vars'
-    - 'GOOGLE_CLIENT_SECRET=$(gcloud secrets versions access latest --secret="google-client-secret")'
-    - '--set-env-vars'
-    - 'JWT_SECRET=$(gcloud secrets versions access latest --secret="jwt-secret")'
-    - '--set-env-vars'
-    - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
-    - '--timeout'
-    - '1200s'
-    - '--set-env-vars'
-    - 'NODE_ENV=production'  # Ensure you're setting NODE_ENV to production
-
-# Optional: Use a timeout if needed
-timeout: 1200s  # Optional: Set a timeout for the deployment process
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - 'gcloud'
+      - 'run'
+      - 'deploy'
+      - 'api-auth-cloud-run'
+      - '--source'
+      - '.'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-west1'
+      - '--set-env-vars'
+      - 'GOOGLE_CLIENT_ID=$(gcloud secrets versions access latest --secret="google-client-id")'
+      - '--set-env-vars'
+      - 'GOOGLE_CLIENT_SECRET=$(gcloud secrets versions access latest --secret="google-client-secret")'
+      - '--set-env-vars'
+      - 'JWT_SECRET=$(gcloud secrets versions access latest --secret="jwt-secret")'
+      - '--set-env-vars'
+      - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
+      - '--set-env-vars'
+      - 'NODE_ENV=production'  # Make sure to set the production environment
+    timeout: 1200s  # Optional: Set a timeout for the deployment process
