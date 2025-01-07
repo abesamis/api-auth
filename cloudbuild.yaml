@@ -5,7 +5,7 @@ steps:
 
   # Step 2: Generate Prisma client
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'prisma', 'generate']  # Add this step to generate Prisma client
+    args: ['run', 'prisma:generate']
 
   # Step 3: Build the project
   - name: 'gcr.io/cloud-builders/npm'
