@@ -16,6 +16,14 @@ steps:
     - '--platform'
     - 'managed'
     - '--region'
-    - 'us-central1'
+    - 'us-west1'
+    - '--set-env-vars'
+    - 'GOOGLE_CLIENT_ID=$(gcloud secrets versions access latest --secret="google-client-id")'
+    - '--set-env-vars'
+    - 'GOOGLE_CLIENT_SECRET=$(gcloud secrets versions access latest --secret="google-client-secret")'
+    - '--set-env-vars'
+    - 'JWT_SECRET=$(gcloud secrets versions access latest --secret="jwt-secret")'
+    - '--set-env-vars'
+    - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
 
 timeout: 1200s  # Optional: Set a timeout for the deployment process
