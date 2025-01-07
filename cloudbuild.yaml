@@ -5,6 +5,8 @@ steps:
 
   # Step 2: Generate Prisma client
   - name: 'gcr.io/cloud-builders/npm'
+    env:
+      - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
     args: ['run', 'prisma:generate']
 
   # Step 3: Build the project
