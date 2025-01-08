@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
@@ -7,7 +7,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Get('show')
-  async show(@Req() req): Promise<void> {
+  async show(@Req() req): Promise<any> {
     const googleClientId = process.env.GOOGLE_CLIENT_ID ?? "";
     const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET ?? "";
     const jwtSecret = process.env.JWT_SECRET ?? "";
@@ -17,7 +17,11 @@ export class AuthController {
     console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
     console.log('GOOGLE_CALLBACK:', googleCallback);
 
-    return process.env;
+    return {
+      GOOGLE_CLIENT_ID: googleClientId,
+      GOOGLE_CLIENT_SECRET: googleClientSecret,
+      GOOGLE_CALLBACK: googleCallback,
+    };
   }
 
   @Get('google')
