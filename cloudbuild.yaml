@@ -5,8 +5,6 @@ steps:
 
   # Step 2: Generate Prisma client
   - name: 'gcr.io/cloud-builders/npm'
-    env:
-      - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
     args: ['run', 'prisma:generate']
 
   # Step 3: Build the project
@@ -26,15 +24,5 @@ steps:
       - 'managed'
       - '--region'
       - 'us-west1'
-      - '--set-env-vars'
-      - 'GOOGLE_CLIENT_ID=$(gcloud secrets versions access latest --secret="google-client-id")'
-      - '--set-env-vars'
-      - 'GOOGLE_CLIENT_SECRET=$(gcloud secrets versions access latest --secret="google-client-secret")'
-      - '--set-env-vars'
-      - 'JWT_SECRET=$(gcloud secrets versions access latest --secret="jwt-secret")'
-      - '--set-env-vars'
-      - 'DATABASE_URL=$(gcloud secrets versions access latest --secret="database-url")'
-      - '--set-env-vars'
-      - 'NODE_ENV=production'
 
 timeout: 1200s
