@@ -24,6 +24,34 @@ export class AuthController {
     };
   }
 
+  @Get('test')
+  async test(@Req() req): Promise<any> {
+    const googleClientId = process.env.GOOGLE_CLIENT_ID ?? "";
+    const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET ?? "";
+    const jwtSecret = process.env.JWT_SECRET ?? "";
+    const googleCallback = process.env.GOOGLE_CALLBACK ?? 'http://localhost:3000/auth/google/redirect';
+
+    console.log('GOOGLE_CLIENT_ID:', googleClientId);
+    console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
+    console.log('GOOGLE_CALLBACK:', googleCallback);
+
+    return {
+      GOOGLE_CLIENT_ID: googleClientId,
+      GOOGLE_CLIENT_SECRET: googleClientSecret,
+      GOOGLE_CALLBACK: googleCallback,
+    };
+
+    try {
+      const response = await axios.post(
+        'https://oauth2.googleapis.com/token',
+        { /* dummy data */ },
+      );
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Connection issue:', error.message);
+    }
+  }  
+
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleAuth(@Req() req): Promise<void> {
