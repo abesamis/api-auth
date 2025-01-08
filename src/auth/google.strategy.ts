@@ -5,9 +5,9 @@ import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
-    const googleClientId = process.env.GOOGLE_CLIENT_ID;
-    const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-    const jwtSecret = process.env.JWT_SECRET;
+    const googleClientId = process.env.GOOGLE_CLIENT_ID ?? "";
+    const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET ?? "";
+    const jwtSecret = process.env.JWT_SECRET ?? "";
     const googleCallback = process.env.GOOGLE_CALLBACK ?? 'http://localhost:3000/auth/google/redirect';
 
     console.log('GOOGLE_CLIENT_ID:', googleClientId);
