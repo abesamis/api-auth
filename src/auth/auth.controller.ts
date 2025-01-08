@@ -6,9 +6,8 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get('google')
-  @UseGuards(AuthGuard('google'))
-  async googleAuth(@Req() req): Promise<void> {
+  @Get('show')
+  async show(@Req() req): Promise<void> {
     const googleClientId = process.env.GOOGLE_CLIENT_ID ?? "";
     const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET ?? "";
     const jwtSecret = process.env.JWT_SECRET ?? "";
@@ -17,7 +16,13 @@ export class AuthController {
     console.log('GOOGLE_CLIENT_ID:', googleClientId);
     console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
     console.log('GOOGLE_CALLBACK:', googleCallback);
-    
+
+    return process.env;
+  }
+
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req): Promise<void> {
     // Initiates Google login
   }
 
