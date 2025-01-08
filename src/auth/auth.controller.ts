@@ -36,11 +36,7 @@ export class AuthController {
     console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
     console.log('GOOGLE_CALLBACK:', googleCallback);
 
-    return {
-      GOOGLE_CLIENT_ID: googleClientId,
-      GOOGLE_CLIENT_SECRET: googleClientSecret,
-      GOOGLE_CALLBACK: googleCallback,
-    };
+
 
     try {
       const response = await axios.post(
@@ -53,6 +49,12 @@ export class AuthController {
     }
 
     console.log('end here')
+
+    return {
+      GOOGLE_CLIENT_ID: googleClientId,
+      GOOGLE_CLIENT_SECRET: googleClientSecret,
+      GOOGLE_CALLBACK: googleCallback,
+    };
   }  
 
   @Get('google')
