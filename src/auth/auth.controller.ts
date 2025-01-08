@@ -9,6 +9,15 @@ export class AuthController {
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleAuth(@Req() req): Promise<void> {
+    const googleClientId = process.env.GOOGLE_CLIENT_ID ?? "";
+    const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET ?? "";
+    const jwtSecret = process.env.JWT_SECRET ?? "";
+    const googleCallback = process.env.GOOGLE_CALLBACK ?? 'http://localhost:3000/auth/google/redirect';
+
+    console.log('GOOGLE_CLIENT_ID:', googleClientId);
+    console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
+    console.log('GOOGLE_CALLBACK:', googleCallback);
+    
     // Initiates Google login
   }
 

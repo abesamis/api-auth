@@ -12,7 +12,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
 
     console.log('GOOGLE_CLIENT_ID:', googleClientId);
     console.log('GOOGLE_CLIENT_SECRET:', googleClientSecret);
-    console.log('GOOGLE_CALLBACK:', jwtSecret);
+    console.log('GOOGLE_CALLBACK:', googleCallback);
     
     super({
       clientID: googleClientId,
