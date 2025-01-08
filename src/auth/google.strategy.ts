@@ -19,15 +19,20 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     profile: any,
     done: VerifyCallback,
   ): Promise<any> {
-    const { name, emails, photos } = profile;
-
-    const user = {
-      email: emails[0].value,
-      displayName: `${name.givenName} ${name.familyName}`,
-      photos: photos,
-      accessToken,
-    };
-
-    done(null, user);
+    try {
+      const { name, emails, photos } = profile;
+  
+      const user = {
+        email: emails[0]?.value,
+        displayName: `${name.givenName} ${name.familyName}`,
+        photos: photos,
+        accessToken,
+      };
+  
+      done(null, user);
+    } catch (error) {
+      console.error('Google Strategy Validation Error:', error);
+      done(error, null);
+    }
   }
 }
