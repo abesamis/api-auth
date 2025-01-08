@@ -45,7 +45,7 @@ export class AuthController {
       );
       console.log('Response:', response.data);
     } catch (error) {
-      console.log('Connection issue:', error.message);
+      console.log('Connection issue:', error);
     }
 
     console.log('end here')
