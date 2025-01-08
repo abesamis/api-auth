@@ -49,8 +49,10 @@ export class AuthController {
       );
       console.log('Response:', response.data);
     } catch (error) {
-      console.error('Connection issue:', error.message);
+      console.log('Connection issue:', error.message);
     }
+
+    console.log('end here')
   }  
 
   @Get('google')
