@@ -11,20 +11,19 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
 
-# Step 4: Deploy to Cloud Run
+  # Step 4: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
-    - 'gcloud'
-    - 'run'
-    - 'deploy'
-    - 'api-auth-cloud-run-v2'
-    - '--image'
-    - 'us-docker.pkg.dev/peppy-strategy-450006-a7/api-auth-cloud-run:latest'
-    - '--platform'
-    - 'managed'
-    - '--region'
-    - 'us-west1'
-
+      - 'gcloud'
+      - 'run'
+      - 'deploy'
+      - 'api-auth-cloud-run-v2'
+      - '--source'
+      - '.'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-west1'
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
