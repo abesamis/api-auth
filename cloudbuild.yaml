@@ -38,6 +38,14 @@ steps:
       - 'JWT_SECRET=jwt_secret:latest'
       - '--add-cloudsql-instances'
       - '${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE}'
+      - '--min-instances'
+      - '0'
+      - '--max-instances'
+      - '1'
+      - '--vpc-connector'
+      - 'projects/${_PROJECT_ID}/locations/${_LOCATION}/connectors/default'
+      - '--vpc-egress'
+      - 'all-traffic'
 
 substitutions:
   _POSTGRES_INSTANCE: "postgresql17"
