@@ -24,6 +24,28 @@ steps:
       - 'managed'
       - '--region'
       - 'us-west1'
+      - '--set-env-vars'
+      - 'NODE_ENV=${_NODE_ENV}'
+      - '--set-env-vars'
+      - 'GOOGLE_CALLBACK=${_GOOGLE_CALLBACK}'
+      - '--set-secrets'
+      - 'DATABASE_URL=database_url:latest'
+      - '--set-secrets'
+      - 'GOOGLE_CLIENT_ID=google_client_id:latest'
+      - '--set-secrets'
+      - 'GOOGLE_CLIENT_SECRET=google_client_secret:latest'
+      - '--set-secrets'
+      - 'JWT_SECRET=jwt_secret:latest'
+      - '--set-env-vars'
+      - 'CLOUD_SQL_CONNECTION_NAME=${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE}'
+
+substitutions:
+  _POSTGRES_INSTANCE: "your-postgres-instance-name"
+  _GOOGLE_CALLBACK: "https://api.osposstore.com/auth/google/redirect"
+  _NODE_ENV: "production"
+  _LOCATION: "us-west1"
+  _PROJECT_ID: "peppy-strategy-450006-a7"
+
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
