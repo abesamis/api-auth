@@ -24,8 +24,7 @@ steps:
       - 'managed'
       - '--region'
       - 'us-west1'
-
-serviceAccount: $_SERVICE_ACCOUNT
+      - '--service-account=${_SERVICE_ACCOUNT}'
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
