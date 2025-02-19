@@ -46,7 +46,7 @@ steps:
       - 'default'  # Connect directly to the default VPC network
       - '--subnet'
       - 'default'  # Use the default subnet
-      - '--egress'
+      - '--ingress'
       - 'all'
 
 substitutions:
