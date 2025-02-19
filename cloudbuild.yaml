@@ -36,8 +36,8 @@ steps:
       - 'GOOGLE_CLIENT_SECRET=google_client_secret:latest'
       - '--set-secrets'
       - 'JWT_SECRET=jwt_secret:latest'
-      - '--set-env-vars'
-      - 'CLOUD_SQL_CONNECTION_NAME=${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE}'
+      - '--add-cloudsql-instances'
+      - '${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE}'
 
 substitutions:
   _POSTGRES_INSTANCE: "your-postgres-instance-name"
