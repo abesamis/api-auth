@@ -6,6 +6,9 @@ steps:
   # Step 2: Generate Prisma client
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'prisma:generate']
+    env:
+      - 'DATABASE_URL=postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)?schema=public'
+    secretEnv: ['POSTGRES_USER', 'POSTGRES_PASSWORD']
 
   # Step 3: Build the project
   - name: 'gcr.io/cloud-builders/npm'
@@ -38,8 +41,6 @@ steps:
       - 'POSTGRES_USER=db_user:latest'
       - '--set-secrets'
       - 'POSTGRES_PASSWORD=db_password:latest'
-      - '--set-env-vars'
-      - 'DATABASE_URL=postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@${_POSTGRES_HOST}:${_POSTGRES_PORT}/$(_POSTGRES_DB)?schema=public'
       - '--set-secrets'
       - 'GOOGLE_CLIENT_ID=google_client_id:latest'
       - '--set-secrets'
@@ -58,9 +59,16 @@ steps:
       - 'default'
       - '--vpc-egress'
       - 'all-traffic'
-      #postgresql://postgres:OYHvgMG1E\D^}g[8@10.77.176.3:5432/auth?schema=public
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/${_PROJECT_ID}/secrets/db_user/versions/latest
+      env: 'POSTGRES_USER'
+    - versionName: projects/${_PROJECT_ID}/secrets/db_password/versions/latest
+      env: 'POSTGRES_PASSWORD'
 
 substitutions:
+  _DATABASE_URL: "${_DATABASE_URL}"
   _POSTGRES_PORT: "${_POSTGRES_PORT}"
   _POSTGRES_DB: "${_POSTGRES_DB}"
   _POSTGRES_HOST: "${_POSTGRES_HOST}"

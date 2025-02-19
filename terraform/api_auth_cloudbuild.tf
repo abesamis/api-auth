@@ -23,6 +23,7 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
     _POSTGRES_HOST          = google_sql_database_instance.postgres_instance.public_ip_address
     _POSTGRES_DB            = var.db_name
     _POSTGRES_PORT          = var.db_port
+    _DATABASE_URL           = local.database_url
   }
 
 }
