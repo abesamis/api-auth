@@ -17,13 +17,11 @@ steps:
       - 'gcloud'
       - 'run'
       - 'deploy'
-      - 'api-auth-cloud-run'
+      - 'api-auth-cloud-run-v2'
       - '--source'
       - '.'
       - '--platform'
       - 'managed'
-      - '--region'
-      - 'us-west1'
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
