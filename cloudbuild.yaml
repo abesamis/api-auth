@@ -23,7 +23,7 @@ steps:
       - '--platform'
       - 'managed'
       - '--region'
-      - 'us-west1'
+      - '${LOCATION}'
       - '--set-env-vars'
       - 'NODE_ENV=${_NODE_ENV}'
       - '--set-env-vars'
@@ -47,7 +47,7 @@ steps:
       - '--set-secrets'
       - 'JWT_SECRET=jwt_secret:latest'
       - '--add-cloudsql-instances'
-      - '${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE_NAME}'
+      - '${PROJECT_ID}:${LOCATION}:${_POSTGRES_INSTANCE_NAME}'
       - '--min-instances'
       - '0'
       - '--max-instances'
@@ -67,8 +67,6 @@ substitutions:
   _POSTGRES_INSTANCE_NAME: "${_POSTGRES_INSTANCE_NAME}"
   _GOOGLE_CALLBACK: "https://api.osposstore.com/auth/google/redirect"
   _NODE_ENV: "production"
-  _LOCATION: "${_LOCATION}"
-  _PROJECT_ID: "peppy-strategy-450006-a7"
 
 
 options:
