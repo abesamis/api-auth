@@ -67,7 +67,7 @@ substitutions:
   _POSTGRES_INSTANCE_NAME: "${_POSTGRES_INSTANCE_NAME}"
   _GOOGLE_CALLBACK: "https://api.osposstore.com/auth/google/redirect"
   _NODE_ENV: "production"
-  _LOCATION: "us-west1"
+  _LOCATION: "${_LOCATION}"
   _PROJECT_ID: "peppy-strategy-450006-a7"
 
 

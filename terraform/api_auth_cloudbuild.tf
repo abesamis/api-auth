@@ -24,6 +24,7 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
     _POSTGRES_DB            = var.db_name
     _POSTGRES_PORT          = var.db_port
     _DATABASE_URL           = local.database_url
+    _LOCATION               = var.region
   }
 
 }
