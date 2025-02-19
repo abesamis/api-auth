@@ -43,11 +43,11 @@ steps:
       - '--max-instances'
       - '1'
       - '--network'
-      - 'default'  # Connect directly to the default VPC network
+      - 'default'
       - '--subnet'
-      - 'default'  # Use the default subnet
-      - '--ingress'
-      - 'all'
+      - 'default'
+      - '--egress-settings'
+      - 'all-traffic'
 
 substitutions:
   _POSTGRES_INSTANCE: "postgresql17"
