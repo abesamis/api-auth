@@ -9,11 +9,7 @@ steps:
 
   # Step 3: Build the project
   - name: 'gcr.io/cloud-builders/npm'
-    args:
-      - 'run'
-      - 'build'
-      - '--service-account'
-      - ${_SERVICE_ACCOUNT}
+    args: ['run', 'build']
 
   # Step 4: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
