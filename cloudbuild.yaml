@@ -28,8 +28,14 @@ steps:
       - 'NODE_ENV=${_NODE_ENV}'
       - '--set-env-vars'
       - 'GOOGLE_CALLBACK=${_GOOGLE_CALLBACK}'
+      - '--set-env-vars'
+      - 'POSTGRES_DB=${_POSTGRES_DB}'
+      - '--set-env-vars'
+      - 'POSTGRES_HOST=${_POSTGRES_HOST}'
       - '--set-secrets'
-      - 'DATABASE_URL=database_url:latest'
+      - 'POSTGRES_USER=db_user:latest'
+      - '--set-secrets'
+      - 'POSTGRES_PASSWORD=db_password:latest'
       - '--set-secrets'
       - 'GOOGLE_CLIENT_ID=google_client_id:latest'
       - '--set-secrets'
@@ -37,7 +43,7 @@ steps:
       - '--set-secrets'
       - 'JWT_SECRET=jwt_secret:latest'
       - '--add-cloudsql-instances'
-      - '${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE}'
+      - '${_PROJECT_ID}:${_LOCATION}:${_POSTGRES_INSTANCE_NAME}'
       - '--min-instances'
       - '0'
       - '--max-instances'
@@ -48,9 +54,12 @@ steps:
       - 'default'
       - '--vpc-egress'
       - 'all-traffic'
+      #postgresql://postgres:OYHvgMG1E\D^}g[8@10.77.176.3:5432/auth?schema=public
 
 substitutions:
-  _POSTGRES_INSTANCE: "postgresql17"
+  _POSTGRES_DB: "${_POSTGRES_DB}"
+  _POSTGRES_HOST: "${_POSTGRES_HOST}"
+  _POSTGRES_INSTANCE_NAME: "${_POSTGRES_INSTANCE_NAME}"
   _GOOGLE_CALLBACK: "https://api.osposstore.com/auth/google/redirect"
   _NODE_ENV: "production"
   _LOCATION: "us-west1"
