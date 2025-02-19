@@ -30,8 +30,8 @@ variable "db_name" {
 }
 
 variable "db_port" {
-  type    = string
-  default = "5432"
+  type    = number
+  default = 5432
 }
 
 variable "db_password_secret_name" {
