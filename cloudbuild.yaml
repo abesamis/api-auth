@@ -23,7 +23,7 @@ steps:
     - '--platform'
     - 'managed'
     - '--region'
-    - 'global'
+    - 'us-west1'
 
 
 options:
