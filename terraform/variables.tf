@@ -5,7 +5,7 @@ variable "project_id" {
 
 variable "region" {
   type    = string
-  default = "us-west1"
+  default = "us-central1"
 }
 
 variable "postgres_instance" {
@@ -27,6 +27,11 @@ variable "postgres_instance_name" {
 variable "db_name" {
   type    = string
   default = "auth"
+}
+
+variable "db_port" {
+  type    = string
+  default = "5432"
 }
 
 variable "db_password_secret_name" {
