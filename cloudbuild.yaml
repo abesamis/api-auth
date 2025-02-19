@@ -42,10 +42,12 @@ steps:
       - '0'
       - '--max-instances'
       - '1'
-      - '--vpc-connector'
-      - 'projects/${_PROJECT_ID}/locations/${_LOCATION}/connectors/default'
-      - '--vpc-egress'
-      - 'all-traffic'
+      - '--network'
+      - 'default'  # Connect directly to the default VPC network
+      - '--subnet'
+      - 'default'  # Use the default subnet
+      - '--egress'
+      - 'all'
 
 substitutions:
   _POSTGRES_INSTANCE: "postgresql17"
