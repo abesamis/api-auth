@@ -61,6 +61,7 @@ steps:
       #postgresql://postgres:OYHvgMG1E\D^}g[8@10.77.176.3:5432/auth?schema=public
 
 substitutions:
+  _POSTGRES_PORT: "${_POSTGRES_PORT}"
   _POSTGRES_DB: "${_POSTGRES_DB}"
   _POSTGRES_HOST: "${_POSTGRES_HOST}"
   _POSTGRES_INSTANCE_NAME: "${_POSTGRES_INSTANCE_NAME}"
