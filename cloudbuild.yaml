@@ -27,5 +27,6 @@ steps:
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
-  
+  serviceAccount: $_SERVICE_ACCOUNT
+
 timeout: 1200s
