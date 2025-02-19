@@ -39,7 +39,7 @@ steps:
       - '--set-secrets'
       - 'POSTGRES_PASSWORD=db_password:latest'
       - '--set-env-vars'
-      - 'DATABASE_URL=${_DATABASE_URL}
+      - 'DATABASE_URL=${_DATABASE_URL}'
       - '--set-secrets'
       - 'GOOGLE_CLIENT_ID=google_client_id:latest'
       - '--set-secrets'
