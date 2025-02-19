@@ -9,7 +9,11 @@ steps:
 
   # Step 3: Build the project
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build']
+    args:
+      - 'run'
+      - 'build'
+      - '--service-account'
+      - ${_SERVICE_ACCOUNT}
 
   # Step 4: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -24,8 +28,6 @@ steps:
       - 'managed'
       - '--region'
       - 'us-west1'
-      - '--service-account'
-      - ${_SERVICE_ACCOUNT}
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
