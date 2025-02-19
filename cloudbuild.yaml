@@ -46,7 +46,7 @@ steps:
       - 'default'
       - '--subnet'
       - 'default'
-      - '--egress-settings'
+      - '--vpc-egress'
       - 'all-traffic'
 
 substitutions:
