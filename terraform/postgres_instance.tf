@@ -65,3 +65,19 @@ resource "google_sql_database" "default" {
   name     = var.db_name
   instance = google_sql_database_instance.postgres_instance.name
 }
+
+resource "google_compute_firewall" "allow_pg_public_access" {
+  name    = "allow-pg-public-access"
+  network = "default"
+
+  direction = "INGRESS"
+  priority  = 1000
+
+  allow {
+    protocol = "tcp"
+    ports    = ["5432"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  description   = "Allow Public access to PG"
+}

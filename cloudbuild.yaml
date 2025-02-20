@@ -57,7 +57,7 @@ steps:
       - '--subnet'
       - 'default'
       - '--vpc-egress'
-      - 'all-traffic'
+      - 'private-ranges-only'
       - '--build-service-account'
       - '${_SERVICE_ACCOUNT}'
 

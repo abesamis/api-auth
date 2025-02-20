@@ -6,9 +6,14 @@ locals {
   repository      = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/abesamis-api-auth"
 }
 
-variable "service_name" {
+variable "auth_service_name" {
   type = string
-  default = "api-auth-cloud-run-v3"
+  default = "api-auth"
+}
+
+variable "frontend_service_name" {
+  type = string
+  default = "frontend-app"
 }
 
 variable "project_id" {
@@ -55,4 +60,14 @@ variable "db_password_secret_name" {
 variable "db_user_secret_name" {
   type    = string
   default = "db_user"
+}
+
+variable "google_client_secret_name" {
+  type    = string
+  default = "google_client_secret"
+}
+
+variable "google_client_id_secret_name" {
+  type    = string
+  default = "google_client_id"
 }

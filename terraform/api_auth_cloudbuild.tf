@@ -1,5 +1,5 @@
 resource "google_cloudbuild_trigger" "deploy_trigger" {
-  name     = "cloud-run-deploy-trigger"
+  name     = "api-auth-build-trigger"
   location = var.region
 
   service_account = local.service_account
@@ -26,7 +26,7 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
     _DATABASE_URL           = local.database_url
     _LOCATION               = var.region
     _SERVICE_ACCOUNT        = local.service_account
-    _SERVICE_NAME           = var.service_name
+    _SERVICE_NAME           = var.auth_service_name
   }
 
 }
