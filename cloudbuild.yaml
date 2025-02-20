@@ -59,7 +59,7 @@ steps:
       - '--vpc-egress'
       - 'all-traffic'
       - '--build-service-account'
-      - 'projects/${PROJECT_ID}/serviceAccounts/cloud-build-service-account@${PROJECT_ID}.iam.gserviceaccount.com'
+      - '${_SERVICE_ACCOUNT}'
 
 substitutions:
   _DATABASE_URL: "${_DATABASE_URL}"
@@ -69,7 +69,8 @@ substitutions:
   _POSTGRES_INSTANCE_NAME: "${_POSTGRES_INSTANCE_NAME}"
   _GOOGLE_CALLBACK: "https://api.osposstore.com/auth/google/redirect"
   _NODE_ENV: "production"
-  _SERVICE_NAME: "api-auth-cloud-run-v3"
+  _SERVICE_NAME: "${_SERVICE_NAME}"
+  _SERVICE_ACCOUNT: "${_SERVICE_ACCOUNT}"
 
 
 options:
