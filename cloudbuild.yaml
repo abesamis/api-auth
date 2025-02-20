@@ -61,20 +61,6 @@ steps:
       - '--build-service-account'
       - 'projects/${PROJECT_ID}/serviceAccounts/cloud-build-service-account@${PROJECT_ID}.iam.gserviceaccount.com'
 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    args:
-      - 'gcloud'
-      - 'run'
-      - 'services'
-      - 'add-iam-policy-binding'
-      - '${_SERVICE_NAME}'
-      - '--region'
-      - '${LOCATION}'
-      - '--member'
-      - 'allUsers'
-      - '--role'
-      - 'roles/run.invoker'
-
 substitutions:
   _DATABASE_URL: "${_DATABASE_URL}"
   _POSTGRES_PORT: "${_POSTGRES_PORT}"
