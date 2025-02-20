@@ -86,5 +86,6 @@ substitutions:
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+  serviceAccount: projects/${PROJECT_ID}/serviceAccounts/cloud-build-service-account@${PROJECT_ID}.iam.gserviceaccount.com
 
 timeout: 1200s
