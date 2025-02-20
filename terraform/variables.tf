@@ -1,3 +1,16 @@
+data "google_project" "current" {}
+
+locals {
+  project_number  = data.google_project.current.number
+  service_account = "projects/${var.project_id}/serviceAccounts/${var.account_id}@${var.project_id}.iam.gserviceaccount.com"
+  repository      = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/abesamis-api-auth"
+}
+
+variable "service_name" {
+  type = string
+  default = "api-auth-cloud-run-v3"
+}
+
 variable "project_id" {
   type = string
   default = "peppy-strategy-450006-a7"

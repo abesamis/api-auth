@@ -2,10 +2,10 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
   name     = "cloud-run-deploy-trigger"
   location = var.region
 
-  service_account = "projects/${var.project_id}/serviceAccounts/${var.account_id}@${var.project_id}.iam.gserviceaccount.com"
+  service_account = local.service_account
 
   repository_event_config {
-    repository = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/abesamis-api-auth"
+    repository = local.repository
     push {
       branch = "^main$"
     }
@@ -13,7 +13,7 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
 
   git_file_source {
     path       = "cloudbuild.yaml"  
-    repository = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/abesamis-api-auth"
+    repository = local.repository
     revision   = "main"
     repo_type  = "GITHUB"
   }
@@ -25,6 +25,8 @@ resource "google_cloudbuild_trigger" "deploy_trigger" {
     _POSTGRES_PORT          = var.db_port
     _DATABASE_URL           = local.database_url
     _LOCATION               = var.region
+    _SERVICE_ACCOUNT        = local.service_account
+    _SERVICE_NAME           = var.service_name
   }
 
 }
