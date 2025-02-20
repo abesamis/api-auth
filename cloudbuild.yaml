@@ -58,6 +58,8 @@ steps:
       - 'default'
       - '--vpc-egress'
       - 'all-traffic'
+      - '--build-service-account'
+      - 'projects/${PROJECT_ID}/serviceAccounts/cloud-build-service-account@${PROJECT_ID}.iam.gserviceaccount.com'
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
@@ -86,6 +88,5 @@ substitutions:
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
-  serviceAccount: projects/${PROJECT_ID}/serviceAccounts/cloud-build-service-account@${PROJECT_ID}.iam.gserviceaccount.com
 
 timeout: 1200s
