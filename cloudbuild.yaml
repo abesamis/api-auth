@@ -72,7 +72,6 @@ substitutions:
   _SERVICE_NAME: "${_SERVICE_NAME}"
   _SERVICE_ACCOUNT: "${_SERVICE_ACCOUNT}"
 
-
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
 
