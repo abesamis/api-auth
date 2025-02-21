@@ -1,3 +1,7 @@
+data "http" "my_ip" {
+  url = "https://api.ipify.org"
+}
+
 # Check if the service account already exists
 data "google_service_account" "existing_cloud_run_sa" {
   account_id = var.account_id
@@ -44,6 +48,11 @@ resource "google_sql_database_instance" "postgres_instance" {
     ip_configuration {
       ipv4_enabled    = true
       private_network = "projects/${var.project_id}/global/networks/default"
+
+      authorized_networks {
+        name  = "home"
+        value = data.http.my_ip.response_body
+      }
     }
 
     backup_configuration {
@@ -64,20 +73,4 @@ resource "google_sql_user" "db_user" {
 resource "google_sql_database" "default" {
   name     = var.db_name
   instance = google_sql_database_instance.postgres_instance.name
-}
-
-resource "google_compute_firewall" "allow_pg_public_access" {
-  name    = "allow-pg-public-access"
-  network = "default"
-
-  direction = "INGRESS"
-  priority  = 1000
-
-  allow {
-    protocol = "tcp"
-    ports    = ["5432"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
-  description   = "Allow Public access to PG"
 }

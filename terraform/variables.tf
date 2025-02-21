@@ -3,7 +3,12 @@ data "google_project" "current" {}
 locals {
   project_number  = data.google_project.current.number
   service_account = "projects/${var.project_id}/serviceAccounts/${var.account_id}@${var.project_id}.iam.gserviceaccount.com"
-  repository      = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/abesamis-api-auth"
+  repository      = "projects/${var.project_id}/locations/${var.region}/connections/github-${var.region}/repositories/${var.auth_repo_name}"
+}
+
+variable "auth_repo_name" {
+  type = string
+  default = "abesamis-api-auth"
 }
 
 variable "auth_service_name" {
@@ -70,4 +75,14 @@ variable "google_client_secret_name" {
 variable "google_client_id_secret_name" {
   type    = string
   default = "google_client_id"
+}
+
+variable "terraform_webhook_secret_name" {
+  type    = string
+  default = "terraform_webhook_secret"
+}
+
+variable "terraform_webhook_key_secret_name" {
+  type    = string
+  default = "terraform_webhook_key"
 }

@@ -1,5 +1,7 @@
 resource "google_compute_global_address" "global_ip" {
   name = "global-ip"
+
+  depends_on = [null_resource.api_auth_force_build]
 }
 
 resource "google_compute_global_forwarding_rule" "global_forwarding_rule" {
@@ -8,23 +10,6 @@ resource "google_compute_global_forwarding_rule" "global_forwarding_rule" {
   target                = google_compute_target_http_proxy.http_proxy.id
   port_range            = "80"
   ip_address            = google_compute_global_address.global_ip.address
-}
-
-# Firewall rule to allow traffic from Load Balancer IP
-resource "google_compute_firewall" "allow_all_traffic" {
-  name    = "allow-all-traffic"
-  network = "default"
-
-  direction = "INGRESS"
-  priority  = 1000
-
-  allow {
-    protocol = "tcp"
-    ports    = ["80", "443"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
-  description   = "Allow all traffic for port 80 and 443"
 }
 
 # HTTP Proxy
@@ -70,6 +55,8 @@ resource "google_compute_region_network_endpoint_group" "api_auth_neg" {
   cloud_run {
     service = var.auth_service_name
   }
+
+  depends_on = [null_resource.api_auth_force_build]
 }
 
 # Network Endpoint Group for Frontend Web App
@@ -80,18 +67,8 @@ resource "google_compute_region_network_endpoint_group" "frontend_neg" {
   cloud_run {
     service = var.frontend_service_name
   }
-}
 
-# Health Check
-resource "google_compute_health_check" "health_check" {
-  name               = "health-check"
-  check_interval_sec = 15
-  timeout_sec        = 5
-
-  http_health_check {
-    port_specification = "USE_SERVING_PORT"
-    request_path       = "/health"
-  }
+  depends_on = [null_resource.api_auth_force_build]
 }
 
 # URL Map with Routing Rules
